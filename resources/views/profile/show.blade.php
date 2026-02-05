@@ -6,7 +6,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
-            {{-- INFORMACIÓN DEL USUARIO --}}
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <h3 class="text-2xl font-bold mb-4">Account Information</h3>
@@ -34,7 +33,6 @@
                 </div>
             </div>
 
-            {{-- PRODUCTOS COMPRADOS (Solo para usuarios normales) --}}
             @if(!$user->isAdmin())
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
@@ -87,7 +85,6 @@
                 </div>
             @endif
 
-            {{-- PRODUCTOS EN VENTA (Solo para administradores) --}}
             @if($user->isAdmin())
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6">
@@ -141,7 +138,6 @@
                 </div>
             @endif
 
-            {{-- MIS VALORACIONES --}}
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <h3 class="text-2xl font-bold mb-4">My Reviews</h3>

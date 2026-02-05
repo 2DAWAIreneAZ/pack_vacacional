@@ -71,7 +71,7 @@ class VacacionController extends Controller
         $vacaciones = $query->paginate(12)->withQueryString();
         $tipos = Tipo::all();
 
-        return view('vacaciones.index', compact('vacaciones', 'tipos'));
+        return view('vacacion.index', ['vacaciones' => $vacaciones, 'tipos' => $tipos]);
     }
 
     /**
@@ -81,7 +81,7 @@ class VacacionController extends Controller
     {
         $this->authorize('create', Vacacion::class);
         $tipos = Tipo::all();
-        return view('vacaciones.create', compact('tipos'));
+        return view('vacacion.create', ['tipos' => $tipos]);
     }
 
     /**
@@ -110,7 +110,7 @@ class VacacionController extends Controller
             // Procesar y guardar las fotos
             if ($request->hasFile('fotos')) {
                 foreach ($request->file('fotos') as $foto) {
-                    $ruta = $foto->store('vacaciones', 'public');
+                    $ruta = $foto->store('vacacion', 'public');
                     Foto::create([
                         'id_vacacion' => $vacacion->id,
                         'ruta' => $ruta,
@@ -120,7 +120,7 @@ class VacacionController extends Controller
 
             DB::commit();
 
-            return redirect()->route('vacaciones.index')
+            return redirect()->route('vacacion.index')
                            ->with('success', '¡Paquete vacacional creado exitosamente!');
 
         } catch (\Exception $e) {
@@ -145,7 +145,7 @@ class VacacionController extends Controller
             $haReservado = $vacacion->estaReservadoPor(auth()->id());
         }
 
-        return view('vacaciones.show', compact('vacacion', 'haReservado'));
+        return view('vacacion.show', ['vacacion' => $vacacion, 'haReservado' => $haReservado]);
     }
 
     /**
@@ -157,7 +157,7 @@ class VacacionController extends Controller
         $tipos = Tipo::all();
         $vacacion->load('fotos');
         
-        return view('vacaciones.edit', compact('vacacion', 'tipos'));
+        return view('vacacion.edit', ['vacacion'  => $vacacion, 'tipos' => $tipos]);
     }
 
     /**
@@ -211,7 +211,7 @@ class VacacionController extends Controller
 
             DB::commit();
 
-            return redirect()->route('vacaciones.index')
+            return redirect()->route('vacacion.index')
                            ->with('success', '¡Paquete vacacional actualizado exitosamente!');
 
         } catch (\Exception $e) {
@@ -247,13 +247,13 @@ class VacacionController extends Controller
 
             DB::commit();
 
-            return redirect()->route('vacaciones.index')
+            return redirect()->route('vacacion.index')
                            ->with('success', '¡Paquete vacacional eliminado exitosamente!');
 
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return redirect()->route('vacaciones.index')
+            return redirect()->route('vacacion.index')
                            ->with('error', 'Error al eliminar el paquete: ' . $e->getMessage());
         }
     }
@@ -279,7 +279,7 @@ class VacacionController extends Controller
                 'id_user' => auth()->id(),
             ]);
 
-            return redirect()->route('vacaciones.show', $vacacion)
+            return redirect()->route('vacacion.show', $vacacion)
                            ->with('success', '¡Reserva realizada exitosamente! Paquete: ' . $vacacion->titulo);
 
         } catch (\Exception $e) {

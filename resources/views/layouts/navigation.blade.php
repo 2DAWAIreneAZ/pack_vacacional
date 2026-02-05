@@ -20,7 +20,7 @@
                         Paquetes
                     </x-nav-link>
                     
-                    <x-nav-link :href="route('profile.show')" :active="request()->routeIs('profile.show')">
+                    <x-nav-link :href="route('profile.show', ['user' => auth()->user()->id])" :active="request()->routeIs('profile.show')">
                         Mi Perfil
                     </x-nav-link>
                 </div>
@@ -56,7 +56,7 @@
                             {{ __('Profile Settings') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('profile.show')">
+                        <x-dropdown-link :href="route('profile.show', ['user' => auth()->user()->id])">
                             My Profile
                         </x-dropdown-link>
 
@@ -97,7 +97,7 @@
                 Paquetes
             </x-responsive-nav-link>
             
-            <x-responsive-nav-link :href="route('profile.show')" :active="request()->routeIs('profile.show')">
+            <x-responsive-nav-link :href="route('profile.show', ['user' => auth()->user()->id])" :active="request()->routeIs('profile.show')">
                 Mi Perfil
             </x-responsive-nav-link>
         </div>
