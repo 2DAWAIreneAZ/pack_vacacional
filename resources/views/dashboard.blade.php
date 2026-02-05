@@ -74,7 +74,7 @@
                                 <p class="text-gray-700">Descubre paquetes vacacionales increíbles</p>
                             </a>
                             
-                            <a href="{{ route('profile.show') }}" 
+                            <a href="{{ route('profile.show', ['user' => auth()->user()->id]) }}" 
                                class="block p-6 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg hover:shadow-lg transition">
                                 <h4 class="text-xl font-bold mb-2">Mis Reservas</h4>
                                 <p class="text-gray-700">Ver mis vacaciones y comentarios</p>

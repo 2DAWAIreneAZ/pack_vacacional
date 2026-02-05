@@ -75,7 +75,7 @@
                         @else
                             <div class="text-center py-8">
                                 <p class="text-gray-500 mb-4">You haven't made any purchases yet.</p>
-                                <a href="{{ route('products.index') }}" 
+                                <a href="route('profile.show', ['user' => auth()->user()->id])" 
                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     Start Shopping
                                 </a>

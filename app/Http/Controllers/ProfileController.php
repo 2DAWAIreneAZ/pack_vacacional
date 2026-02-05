@@ -22,8 +22,8 @@ class ProfileController extends Controller
         ]);
     }
 
-		public function show(User $user): View {
-			return view('profile.show', ['user' => $user]);
+		public function show(User $user, Purchase $purchases): View {
+			return view('profile.show', ['user' => $user, 'purchases' => $purchases]);
 		}
 
     /**
